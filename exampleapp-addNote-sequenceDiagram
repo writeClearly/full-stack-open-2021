@@ -1,0 +1,24 @@
+title ExampleApp: Posting Notes
+
+note over client:
+client sends note
+end note
+client -> server: HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note
+client -> server: [{content:"userInput", date:"YYYY-MM-DD"}]
+note over server:
+server adds new note
+end note
+note over client:
+client reloads website
+end note
+client -> server: GET https://studies.cs.helsinki.fi/exampleapp/note
+server->client: [UPDATED] /exampleapp/notes
+client -> server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
+server->client: /exampleapp/main.css
+client -> server: GET https://studies.cs.helsinki.fi/exampleapp/main.js
+server->client: /exampleapp/main.js
+client -> server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
+server->client: /exampleapp/data.json
+client -> server: GET https://studies.cs.helsinki.fi/favicon.ico
+server->client: /exampleapp/notes
+
