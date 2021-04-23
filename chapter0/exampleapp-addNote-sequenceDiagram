@@ -8,6 +8,10 @@ client -> server: [{content:"userInput", date:"YYYY-MM-DD"}]
 note over server:
 server adds new note
 end note
+note over server:
+server ask client to reload page
+end note
+server -> client: Response 302 FOUND
 note over client:
 client reloads website
 end note
