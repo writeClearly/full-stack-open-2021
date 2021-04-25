@@ -1,0 +1,25 @@
+title SinglePageApp: Connecting with client
+
+client->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/spa
+server-->client: HTML-code
+client->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.css
+server-->client: main.css
+client->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.js
+server-->client: main.js
+
+note over client:
+browser starts executing js-code
+that requests JSON data from server 
+end note
+
+client->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/data.json
+server-->client: { content: "Note Text", date: "YYYY-MM-DD" }
+note over client:
+browser executes the event handler
+that renders notes to display
+end note
+client->server: HTTP GET https://studies.cs.helsinki.fi/favicon.ico
+server-->client: favicon.ico
+note over client:
+client fetches link
+end note
