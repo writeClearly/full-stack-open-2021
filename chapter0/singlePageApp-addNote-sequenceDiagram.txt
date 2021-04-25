@@ -1,0 +1,19 @@
+title SinglePageApplication: Posting Notes
+
+note over client:
+client sends note
+end note
+client -> server: HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa
+client -> server: [{content:"userInput", date:"YYYY-MM-DD"}]
+note over server:
+server adds new note
+end note
+server -> client: Response 201 CREATED
+note over server:
+server confirms note creation
+end note
+note over client:
+client reloads website
+end note
+
+
