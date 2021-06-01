@@ -16,8 +16,8 @@ const App = () => {
   const percentageSign = "%"
   
   // 31/05/2021
-  // All handle functions mantain incrementing relative score counter
-  // and main counter currently called "votesCounter"
+  // All handle functions mantain incrementing relative score value
+  // and main value currently called "votesCounter"
   const handleGood = () => {
     setGood(goodCounter + 1)
     setVotes(votesCounter + 1)
@@ -72,7 +72,7 @@ const App = () => {
       </p>
       <h2>Statistics</h2>
       <ul>
-        <Statistics props = {statsContainer}/>
+        <Statistics props = {statsContainer} mainCounter = {votesCounter}/>
       </ul>
     </div>
   )
@@ -83,16 +83,20 @@ const Button = ({ text, handleClick }) => {
     <button onClick={handleClick}> {text}</button>
   )
 }
-const StatsRow = ({ name, counter}) => {
+// Print single row of statistics
+const Statistic = ({text, value}) => {
   return (
-    <p>{name}: {counter}</p>
+    <p>{text}: {value}</p>
   )
 }
 // Prints all feedback statistics
-const Statistics = ({props}) =>{
+const Statistics = ({props, mainCounter}) =>{
+  if(mainCounter === 0){
+    return(<div>No feedback given</div>)
+  }
         return(
           //Takes each row from object and prints in Key:Value style by styling component
-          <div>{props.map(row => <StatsRow name={Object.keys(row)} counter = {Object.values(row)} />)}</div>
+          <div>{props.map(row => <Statistic text={Object.keys(row)} value = {Object.values(row)} />)}</div>
           )
 }
 export default App;
