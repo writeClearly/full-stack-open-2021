@@ -86,7 +86,7 @@ const Button = ({ text, handleClick }) => {
 // Print single row of statistics
 const Statistic = ({text, value}) => {
   return (
-    <p>{text}: {value}</p>
+    <tr><td>{text}: {value}</td></tr>
   )
 }
 // Prints all feedback statistics
