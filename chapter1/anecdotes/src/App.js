@@ -10,19 +10,32 @@ const App = () => {
     'Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.',
     'Programming without an extremely heavy use of console.log is same as if a doctor would refuse to use x-rays or blod tests when dianosing patients'
   ]
-   
-  const [selected, setSelected] = useState(0)
+
+  const [counters,setCounters] = useState(Array(anecdotes.length).fill((0)))
+  // console.log(counters)
+  const [selected, setSelected] = useState(getRandomInt(anecdotes.length))
   const randomLabel = "Random Quote"
+  const voteLabel = "Vote"
+  // console.log("Counters: ", counters)
   const randQuote = () =>{
-    const randInt = getRandomInt(anecdotes.length)
-    setSelected(randInt)
+    const randint = getRandomInt(anecdotes.length)
+    setSelected(randint)
+  }
+
+  const voteQuote = () =>{
+    //Copy counters to incremeted array, then increment vote counter
+    var incremented = [...counters]
+    incremented[selected] += 1 
+    setCounters(incremented)
   }
   return (
     <div>
       {anecdotes[selected]}
-      <p></p>
       <Button text = {randomLabel} onClick = {randQuote}/>
+      <Button text = {voteLabel} onClick = {voteQuote}/>
+      <p>This quote has: {counters[selected]} votes</p>
     </div>
+    
   )
 }
 const Button  = ({text, onClick}) =>{
