@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Course from './Course.js'
+import Course from './course-components/Course.js'
 
 const App = () => {
   // This app is single page listing of courses in form:
