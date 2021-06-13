@@ -1,9 +1,9 @@
 import React from 'react'
 import Part from './Part.js'
 const Content = ({course}) =>{
-    // Prints Course name and Exercises number
+    // Prints subjects of single module
     // console.log("CONTENT",course ,course.map(row => row.exercises))
-    return(
+    return( 
         <div>
             {course.map(row => <Part name = {row.name} exercises = {row.exercises}/>)}
         </div>
