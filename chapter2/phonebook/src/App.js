@@ -1,45 +1,46 @@
 import React, { useState } from 'react'
 
 const App = () => {
-  const [ persons, setPersons ] = useState([
-    { name: 'Arto Hellas' }
-  ]) 
-  const [ newName, setNewName ] = useState('')
-  const namePlaceholder = "Add name"
-  const handleInput = (event) =>{
-    // Receives input form name field and adds new person
-    const person = {
-      name:event.target.value
-    }
-      console.log("INPUT HANDLER")
-      setNewName(person)
+  const [persons, setPersons] = useState([{ name: "Jim" }, { name: "Jane" }])
+  const [newPerson, setNewPerson] = useState([])
+
+  const handleAddNote = (event) => {
+    // handles adding note after clicking on submit add
+    event.preventDefault()                                //Disable reload onclick
+    if (newPerson.length === 0)
+      return
+    if (persons.some(({ name }) => name === newPerson)){  // Prevent duplicate object
+      window.alert(`${newPerson} is already in phonebook`)
+        return
+      }
+    setPersons(persons.concat({ name: newPerson }))
+    setNewPerson([])
   }
-  const handleAddNote = (event) =>{
-    // 
-    event.preventDefault()
-    if (newName !== ""){
-    console.log("New name empty", persons)
-    setPersons(persons.concat(newName))
-    setNewName('')
-  }
+  const handleInput = (event) => {
+    setNewPerson(event.target.value)
   }
   return (
     <div>
       <h2>Phonebook</h2>
       <form>
         <div>
-          name: <input placeholder={namePlaceholder} onChange = {handleInput}/>
+          name: <input onChange={handleInput} />
         </div>
         <div>
-          <button type="submit" onClick = {handleAddNote}>add</button>
+          <button type="submit" onClick={handleAddNote}>add</button>
         </div>
       </form>
       <h2>Numbers</h2>
       <ul>
-        {persons.map((person) => <li>{person.name}</li>)}
+        <Phonebook persons={persons} />
       </ul>
+    </div>)
+}
+const Phonebook = ({persons}) =>{
+  return(
+    <div>
+      {persons.map((person) => <li>{person.name}</li>)}
     </div>
   )
 }
-
 export default App
