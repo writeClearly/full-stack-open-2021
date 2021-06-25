@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
-
+import Phonebook from './Phonebook'
+import PersonsAddForm from './PersonsAddForm'
+import PersonsSearchForm from './PersonsSearchForm'
 const App = () => {
   const [persons, setPersons] = useState([{ name: "Ada", phone:'124',  searched:true }, 
                                           { name: "Jane",phone:'1312', searched:true },
@@ -11,7 +13,7 @@ const App = () => {
     event.preventDefault()                                //Disable reload onclick
     if (newPerson.length === 0)
       return
-    if (persons.some(({ name }) => name === newPerson)){  // Prevent duplicate object
+    if (persons.some(({ name }) => name.toLowerCase() === newPerson.toLowerCase())){  // Prevent duplicate object
       window.alert(`${newPerson} is already in phonebook`)
         return
       }
@@ -43,27 +45,9 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
-      <div>search for: <input onChange = {handleSearchName}/></div>
-      <form>
-        <div>name: <input onChange={handleNameInput} /></div>
-        <div>number: <input onChange={handlePhoneInput}/></div>
-        <div>
-          <button type="submit" onClick={handleAddNote}>add</button>
-        </div>
-      </form>
-      <h2>Numbers</h2>
-      <ul>
-        <Phonebook persons={persons} />
-      </ul>
+      <PersonsSearchForm handleSearchName={handleSearchName}/>
+      <PersonsAddForm handleNameInput={handleNameInput} handlePhoneInput={handlePhoneInput} handleAddNote={handleAddNote}/>
+      <Phonebook persons={persons} />
     </div>)
-}
-const Phonebook = ({persons}) =>{
-  // Print PersonName and Phone if currently searched
-  return(
-    <div>
-      {persons.map((person) => 
-                person.searched ===true ? <li>{person.name} {person.phone}</li>:"")}
-    </div>
-  )
 }
 export default App
