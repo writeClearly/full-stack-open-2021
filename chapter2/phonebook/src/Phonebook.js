@@ -6,8 +6,9 @@ const Phonebook = ({persons}) =>{
         <h2>Numbers</h2>
         <ul>
       <div>
-        {persons.map((person) => 
-                   <li>{person.name} {person.phone}</li>)}
+        {persons.map((person) => person.searched === true ?
+                   <li>{person.name} {person.phone}</li>:
+                   "")}
       </div>
       </ul>
     </div>
