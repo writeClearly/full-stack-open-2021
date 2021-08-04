@@ -1,6 +1,6 @@
 import { useState } from "react"
 import Persons from './Persons.js'
-const Filter = ({persons}) =>{
+const Filter = ({persons, setPersons}) =>{
     // Show persons matching user input from searchbar
     const [searchedPerson, setSearchedPerson] = useState([])
     const handleInputSearchedPerson = (event) => {
@@ -18,7 +18,7 @@ const Filter = ({persons}) =>{
       <div>
         <div><p>filter shown with<input onChange={handleInputSearchedPerson}/></p></div>
         <h3>Numbers</h3>
-        <Persons persons={filterArray(persons, searchedPerson)}/>
+        <Persons persons={filterArray(persons, searchedPerson)} setPersons={setPersons}/>
       </div>
     )
   }

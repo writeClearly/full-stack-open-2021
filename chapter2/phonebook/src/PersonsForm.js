@@ -21,9 +21,12 @@ const PersonForm = ({persons, setPersons}) =>{
         alert(`${newPerson.name} is already added to phonebook`)
         return;
       }
-  
-      PersonsStorage.postPerson(newPerson) //equivalent to axios get
-      setPersons(persons.concat(newPerson))
+
+      PersonsStorage.postPerson(newPerson).then(result => 
+        {
+          console.log(result);
+          setPersons(persons.concat(result))
+        })
       setNewPerson('')
     }
     return (
