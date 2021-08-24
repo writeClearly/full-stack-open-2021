@@ -1,4 +1,3 @@
-import axios from 'axios'
 import { useState } from 'react'
 import PersonsStorage from './services/PersonsStorage.js'
 const PersonForm = ({ persons, setPersons }) => {
@@ -16,7 +15,6 @@ const PersonForm = ({ persons, setPersons }) => {
     if (newPerson.number === undefined || newPerson.name === undefined) return;
     if (newPerson.number.length < 1 || newPerson.name.length < 1) return;
 
-    console.log(newPerson)
     //If name is already present prompt update
     if (persons.map(person => person.name.toLowerCase()).indexOf(newPerson.name.toLowerCase()) !== -1) {
       if (window.confirm(`${newPerson.name} is already added to phonebook, replace the old number ?`))
@@ -25,7 +23,6 @@ const PersonForm = ({ persons, setPersons }) => {
     }
 
     PersonsStorage.postPerson(newPerson).then(result => {
-      console.log(result);
       setPersons(persons.concat(result))
     })
     setNewPerson('')
@@ -43,8 +40,8 @@ const PersonForm = ({ persons, setPersons }) => {
   return (
     <div>
       <form onSubmit={handleAddPerson}>
-        <div>name:<input onChange={handleInputNameChange} /></div>
-        <div>number:<input onChange={handleInputNumberChange} /></div>
+        <div>Name:<input onChange={handleInputNameChange} /></div>
+        <div>Number:<input onChange={handleInputNumberChange} /></div>
         <input type="submit" value="Add" />
       </form>
     </div>

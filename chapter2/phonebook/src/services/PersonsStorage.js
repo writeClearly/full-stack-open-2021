@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseURL = 'http://localhost:3001/persons'
+const baseURL = 'https://warm-stream-65671.herokuapp.com/api/persons'
 const getPersons = () => {
   const request = axios.get(baseURL)
   return request.then(response => response.data)
