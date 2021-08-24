@@ -16,7 +16,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "rebuild": "cd ../../../sandbox/fullstack_lectures/part3/phonebook-backend/ && rm -rf /build &&  cd ../../../../fullstack/chapter2/phonebook/ && rm -rf /build && npm run build && mv build/ ../../../sandbox/fullstack_lectures/part3/phonebook-backend/"
   },
   "eslintConfig": {
     "extends": [

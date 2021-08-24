@@ -7,7 +7,7 @@ const Persons = ({ persons, setPersons }) => {
       .then(response => setPersons(persons.filter(p => p.id !== personId)))
   }
   return (
-    <div>{persons.map(person => <li>{person.name} {person.number} <input type="button" value="delete" onClick={() => deletePerson(person.id)} /></li>)}</div>
+    <div>{persons.map(person => <li key = {person.id}>{person.name} {person.number} <input type="button" value="delete" onClick={() => deletePerson(person.id)} /></li>)}</div>
   )
 }
 export default Persons

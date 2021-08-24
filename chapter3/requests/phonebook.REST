@@ -1,0 +1,37 @@
+@serverURL = http://localhost:3001
+GET {{serverURL}}/
+###
+GET {{serverURL}}/api/persons HTTP/1.1
+###
+POST {{serverURL}}/api/persons HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+{
+    "name":"Noemi"
+}
+###
+POST {{serverURL}}/api/persons HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+{
+    "number":"12424"
+}
+
+
+###
+DELETE {{serverURL}}/api/persons/ HTTP/1.1
+Content-Type: application/json
+
+###
+POST {{serverURL}}/api/persons HTTP/1.1
+Content-Type: application/json
+Accept: application/json
+
+{
+    "name":"RestClient7",
+    "number":"57899876481"
+}
+###
+GET {{serverURL}}/api/persons/info HTTP/1.1
