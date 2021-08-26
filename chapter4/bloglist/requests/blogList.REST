@@ -1,0 +1,17 @@
+@baseUrl = http://localhost:3003
+@blogRoute = /api/blogs
+
+GET {{baseUrl}} HTTP/1.1
+###
+GET {{baseUrl}}{{blogRoute}} HTTP/1.1
+###
+POST {{baseUrl}}{{blogRoute}} HTTP/1.1
+Content-Type: application/json
+
+{
+    "title": "First title",
+    "author": "unknown",
+    "url": "lagjko/dig",
+    "likes": "2"
+}
+
