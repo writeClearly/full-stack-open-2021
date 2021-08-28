@@ -9,7 +9,7 @@ const logger = require("./utils/logger")
 
 //{ useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true }
 mongoose.connect(config.MONGO_URL).then(logger.info("Connected to DB")).catch((error) => logger.error(`DB not connected ${error}`))
-logger.info(`App.js is imported`)
+logger.info("App.js Here")
 app.use(cors())
 app.use(express.json())
 app.use(blogPostRouter)
