@@ -12,7 +12,8 @@ mongoose.connect(config.MONGO_URL).then(logger.info("Connected to DB")).catch((e
 logger.info("App.js Here")
 app.use(cors())
 app.use(express.json())
-app.use(blogPostRouter)
+app.use("/api/blogs", blogPostRouter)
 // app
+console.log(`Node env ${process.env.NODE_ENV}`)
 
 module.exports = app
