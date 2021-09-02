@@ -40,9 +40,29 @@ describe("api test", () => {
     const response = await api
       .get("/api/blogs")
       
-    expect(response.body).toHaveLength(2)
-  }, 10000)
-  
+    expect(response.body).toHaveLength(initialBlogs.length)
+  }, 10000),
+  test("properly adds blog by POST", async () => {
+    const testBlog = 
+    {
+      "title": "Will i be added?",
+      "author": "QA",
+      "url": "/ootp/as",
+      "likes": "15"
+    }
+    let newBlogPost = new blogPost(testBlog)
+    await newBlogPost.save()
+    const response = await api.get("/api/blogs")
+    const allBlogs =  response.body
+
+    // Warning!! 
+    // as 02/09/2021 /dd/mm/yyyy
+    // mongose blogPost model has implemented toJSON()., which stripes some properities out of model
+    // thus if you want to compare newly added object, with Mongoose entries from REST GET,
+    // you have to call toJSON() on newly added object to get exact form with database ones
+    expect(allBlogs).toContainEqual(newBlogPost.toJSON())
+    expect(allBlogs).toHaveLength(initialBlogs.length + 1)
+  })
 })
 afterAll(() => {
   mongoose.connection.close()

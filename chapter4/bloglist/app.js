@@ -13,7 +13,6 @@ logger.info("App.js Here")
 app.use(cors())
 app.use(express.json())
 app.use("/api/blogs", blogPostRouter)
-// app
 console.log(`Node env ${process.env.NODE_ENV}`)
 
 module.exports = app
