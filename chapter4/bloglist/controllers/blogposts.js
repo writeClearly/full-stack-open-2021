@@ -21,4 +21,19 @@ blogPostRouter.post("/", async (request, response) => {
   const result = await blog.save()
   response.status(201).json(result)
 })
+
+blogPostRouter.delete("/:id", async (request, response) => {
+  Blog.findByIdAndDelete(request.params.id,  (error) =>{
+    if(error){
+      let errorHint = "error hint not ready"
+      if(error.name === "CastError")
+        errorHint = "Value of id seems to be incorrect" 
+      logger.error(error.message)
+      response.status(400).send(errorHint)}
+    else{
+      logger.info("Successful deletion")
+      response.status(204).end()
+    }
+  })
+})
 module.exports = blogPostRouter

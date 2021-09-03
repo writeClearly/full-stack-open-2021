@@ -14,3 +14,6 @@ Content-Type: application/json
     "url": "lagjko/dig",
     "likes": "2"
 }
+
+###
+DELETE {{baseUrl}}{{blogRoute}}/61310577b09149ff58cca9c HTTP/1.1
