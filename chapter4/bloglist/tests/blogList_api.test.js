@@ -63,7 +63,7 @@ describe("when api has initial notes", () => {
     // you have to call toJSON() on newly added object to get exact form with database ones
     expect(allBlogs).toContainEqual(newBlogPost.toJSON())
     expect(allBlogs).toHaveLength(initialBlogs.length + 1)
-  })
+  }),
   test("it deletes note if id is correct", async () => {
     // Check existence of post, and then delete it with chcking result
     const response = await api.get(blogsUrl)
@@ -74,7 +74,7 @@ describe("when api has initial notes", () => {
     const responseUpdated = await api.get(blogsUrl)
     expect(responseUpdated.body).not.toContainEqual(searchedBlog.toJSON())
   })
-  test("it throws CastError if id is incorrect", async () => {
+  test("it throws CastError if deleted id is incorrect", async () => {
     const deleteID = "32434556789uhgcfghguioiytgd"
     try{
       blogPost.findByIdAndDelete(deleteID)
@@ -82,6 +82,14 @@ describe("when api has initial notes", () => {
       expect(error.message).toBe("CastError")}
   }
   )
+  test("it properly increments likes", async () => {
+    // Get first initialBlog increment likes and send PUT to MongoDB, check result
+    const fetchedBlog = await blogPost.findOne({title:initialBlogs[0].title})
+    fetchedBlog.likes = parseInt(fetchedBlog.likes) + 1
+    await blogPost.findByIdAndUpdate(fetchedBlog.id, fetchedBlog, {new:true}) // {new:true} returns updated note instead of previous 
+    const incrementedBlog = await blogPost.findOne({title:fetchedBlog.title})
+    expect(incrementedBlog.likes).toEqual(parseInt(initialBlogs[0].likes) + 1)
+  })
 })
 afterAll(() => {
   mongoose.connection.close()

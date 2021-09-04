@@ -36,4 +36,23 @@ blogPostRouter.delete("/:id", async (request, response) => {
     }
   })
 })
+
+blogPostRouter.put("/:id", async (request, response) => {
+  const body = request.body
+  const blog = {
+    "title": request.body.title,
+    "author": request.body.author,
+    "url": request.body.url,
+    "likes": request.body.likes
+  }
+  console.log(body)
+  try{
+    const updatedBlog = await Blog.findByIdAndUpdate(request.params.id, blog, {new:true}) // new:true returns updated note
+    console.log(updatedBlog)
+    response.sendStatus(200)
+  }catch(error){
+    if(error.message === "CastError")
+      response.status(400).send("Bad id")
+  }
+})
 module.exports = blogPostRouter
