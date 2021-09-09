@@ -1,6 +1,6 @@
 @baseUrl = http://localhost:3003
 @blogRoute = /api/blogs
-
+@usersRoute = /api/users
 GET {{baseUrl}} HTTP/1.1
 ###
 GET {{baseUrl}}{{blogRoute}} HTTP/1.1
@@ -27,4 +27,17 @@ Content-Type: application/json
     "author": "unknown",
     "url": "lagjko/dig",
     "likes": "3"
+}
+
+### 
+GET {{baseUrl}}{{usersRoute}} HTTP/1.1
+Content-Type: application/json
+###
+POST {{baseUrl}}{{usersRoute}} HTTP/1.1
+Content-Type:  application/json
+
+{
+    "username" : "Jaon114",
+    "name" : "Jane",
+    "password" : "password1234"
 }
