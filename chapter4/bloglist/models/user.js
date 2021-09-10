@@ -17,7 +17,7 @@ userSchema.set("toJSON",  {
     delete returnedObject.passwordHash
     delete returnedObject._id
     delete returnedObject.__v
-    delete returnedObject.blogpost // It may be usefull to uncomment, if blogs will be needed
+    // delete returnedObject.blogpost // It may be usefull to comment, if blogs will be needed
   }
 })
 const User = mongoose.model("User", userSchema)

@@ -1,25 +1,29 @@
 const logger = require("../utils/logger")
 const Blog = require("../models/blogpost")
 const blogPostRouter = require("express").Router()
-
-const printRequestURL = (request) => {
-  logger.info(`blogpost.js ${request.originalUrl}`)
-}
+const User = require("../models/user")
 
 blogPostRouter.get("/status", (request, response) => {
-  printRequestURL(request)
   response.json("Works fine")
 })
   
 blogPostRouter.get("/", async (request, response) => {
-  const result = await Blog.find({})
+  const result = await Blog.find({}).populate("user")
   response.json(result)
 })
   
 blogPostRouter.post("/", async (request, response) => {
   const blog = new Blog(request.body)
-  const result = await blog.save()
-  response.status(201).json(result)
+  if(!blog.user){
+    const somePerson = await User.findOne({})
+    blog.user = somePerson._id
+  }
+
+  const savedBlog = await blog.save()
+  const userCreator = await User.findById(blog.user)
+  userCreator.blogpost = userCreator.blogpost.concat(savedBlog._id)
+  await userCreator.save()
+  response.status(201).json(savedBlog)
 })
 
 blogPostRouter.delete("/:id", async (request, response) => {

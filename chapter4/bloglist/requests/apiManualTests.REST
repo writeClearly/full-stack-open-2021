@@ -10,7 +10,7 @@ Content-Type: application/json
 
 {
     "title": "Second title",
-    "author": "unknown",
+    # "author": "unknown",
     "url": "lagjko/dig",
     "likes": "2"
 }

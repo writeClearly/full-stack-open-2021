@@ -20,7 +20,8 @@ usersRouter.post("/", (request, response) => {
   response.json(request.body)
 })
 
-usersRouter.get("/", (request, response) => {
-  User.find({}).then((result) => response.send(result))
+usersRouter.get("/", async (request, response) => {
+  const users = await User.find({}).populate("blogpost", {title:1, url:1, author:1}) // {title:1} means include property in response
+  response.json(users)
 })
 module.exports = usersRouter
