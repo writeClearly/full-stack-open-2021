@@ -7,6 +7,7 @@ const blogPostRouter = require("./controllers/blogposts")
 const mongoose = require("mongoose")
 const logger = require("./utils/logger")
 const usersRouter = require("./controllers/users") 
+const loginRouter = require("./controllers/login") 
 const pathLogger = require("./utils/pathLogger")
 
 //{ useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true }
@@ -17,6 +18,7 @@ app.use(express.json())
 app.use(pathLogger)
 app.use("/api/blogs", blogPostRouter)
 app.use("/api/users", usersRouter)
+app.use("/api/login", loginRouter)
 console.log(`Node env ${process.env.NODE_ENV}`)
 
 module.exports = app

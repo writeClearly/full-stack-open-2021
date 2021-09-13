@@ -1,18 +1,21 @@
 @baseUrl = http://localhost:3003
 @blogRoute = /api/blogs
 @usersRoute = /api/users
+
+@loginRoute = /api/login
 GET {{baseUrl}} HTTP/1.1
 ###
 GET {{baseUrl}}{{blogRoute}} HTTP/1.1
 ###
 POST {{baseUrl}}{{blogRoute}} HTTP/1.1
 Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik1lcm4iLCJpZCI6IjYxM2YyMGVlNmVkYjJhODNhZWVjOWZmMyIsImlhdCI6MTYzMTUyNzUzN30.Rd5apkCvOjKLZpB2ETEDwJi-D3aGNM-iA5OIO9ysGz4
 
 {
-    "title": "Second title",
-    "author": "unknown",
-    "url": "lagjko/dig",
-    "likes": "2"
+    "title": "Test Mern own me 2",
+    "author": "Moe",
+    "url": "bit.ly/af1r1",
+    "likes": "235"
 }
 
 ### 
@@ -23,8 +26,8 @@ POST {{baseUrl}}{{usersRoute}} HTTP/1.1
 Content-Type:  application/json
 
 {
-    "username" : "Jaon114",
-    # "name" : "Jane",
+    "username" : "Mern",
+    # "name" : "Moe",
     "password" : "1234"
 }
 
@@ -43,10 +46,10 @@ Content-Type: application/json
 }
 
 ###
-POST {{baseUrl}}{{usersRoute}}/login
+POST {{baseUrl}}{{loginRoute}}
 Content-Type: application/json
 
 {
-    "username" : "Jaon114",
+    "username" : "Mern",
     "password" : "1234"
 }

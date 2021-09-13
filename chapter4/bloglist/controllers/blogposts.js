@@ -2,6 +2,16 @@ const logger = require("../utils/logger")
 const Blog = require("../models/blogpost")
 const blogPostRouter = require("express").Router()
 const User = require("../models/user")
+const jwt = require("jsonwebtoken")
+
+const getTokenFrom = (request) =>{
+  const authorization = request.get("authorization")
+  if(authorization && authorization.toLowerCase().startsWith("bearer"))
+    return authorization.substring(7)
+  else
+    return null
+}
+
 
 blogPostRouter.get("/status", (request, response) => {
   response.json("Works fine")
@@ -13,15 +23,17 @@ blogPostRouter.get("/", async (request, response) => {
 })
   
 blogPostRouter.post("/", async (request, response) => {
+  const token = getTokenFrom(request)
+  const decodedToken = jwt.verify(token, process.env.SECRET)
+  if(!decodedToken)
+    return response.status(401).send("Auth token missing")
   const blog = new Blog(request.body)
-  if(!blog.user){
-    const somePerson = await User.findOne({})
-    blog.user = somePerson._id
-  }
-
+  logger.info(decodedToken.id)
+  const userCreator = await User.findById(decodedToken.id)
+  if(!userCreator)
+    return response.sendStatus(401)
   const savedBlog = await blog.save()
-  const userCreator = await User.findById(blog.user)
-  userCreator.blogpost = userCreator.blogpost.concat(savedBlog._id)
+  userCreator.blogpost = userCreator.blogpost.concat(savedBlog.id)
   await userCreator.save()
   response.status(201).json(savedBlog)
 })
